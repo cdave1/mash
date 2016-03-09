@@ -47,3 +47,5 @@ libtool
 *Makefile
 py-compile
 stamp-h1
+
+/src/Matrix.ios.*
