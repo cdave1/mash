@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([MathScraps], [1.0.0], [david@davidpetrie.com])
+AC_INIT([MathScraps], [1], [david@davidpetrie.com])
 AC_CONFIG_SRCDIR([include/math_scraps.h])
 AM_INIT_AUTOMAKE([dist-bzip2 no-dist-gzip check-news])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES])
@@ -13,7 +13,7 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_PROG_CXX
 AC_PROG_CC
 
-LIBMATHSCRAPS_VERSION=1.0.0
+LIBMATHSCRAPS_VERSION=1
 
 AC_SUBST(LIBMATHSCRAPS_VERSION)
 
