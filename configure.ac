@@ -6,6 +6,7 @@ AC_INIT([MathScraps], [1.0.0], [david@davidpetrie.com])
 AC_CONFIG_SRCDIR([include/math_scraps.h])
 AM_INIT_AUTOMAKE([dist-bzip2 no-dist-gzip check-news])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES])
+AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
 # Checks for programs.
@@ -15,6 +16,8 @@ AC_PROG_CC
 LIBMATHSCRAPS_VERSION=1.0.0
 
 AC_SUBST(LIBMATHSCRAPS_VERSION)
+
+LT_INIT
 
 # Checks for libraries.
 
