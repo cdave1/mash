@@ -6,7 +6,6 @@
 #include <Color4f.h>
 #include <Color4ub.h>
 #include <Matrix.h>
-#include <Quaternion.h>
 #include <Size2.h>
 #include <Size3.h>
 #include <Vec2.h>
@@ -15,6 +14,10 @@
 #include <AABB.h>
 
 namespace scraps {
+    inline void PrintMe() {
+        fprintf(stderr, "hello world");
+    }
+
     inline Vec3 unproject(const Vec3 &window_pos, const Matrix &modelView, const Matrix &projection,
                           const AABB &viewport) {
         Matrix inverse, view;
@@ -59,14 +62,6 @@ namespace scraps {
 
         return Vec3(vec[0] * f, vec[1] * f, vec[2] * f);
     }
-
-
-    /*
-    inline Quaternion normalize(const Quaternion &quat) {
-        Quaternion q = quat;
-        q.Normalize();
-        return q;
-    }*/
 
 
     inline Vec2 normalize(const Vec2& vec) {

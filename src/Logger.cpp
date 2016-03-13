@@ -1,6 +1,6 @@
 #include "Logger.h"
 
-#include <math_scraps.h>
+#include <common.h>
 
 std::function<void(const std::string &log)> logCallback;
 
@@ -25,6 +25,8 @@ void logger::i(const char *fmt, ...) {
 
 #ifdef WIN32
 	OutputDebugStringA(output);
+#else
+    fprintf(stderr, "%s", output);
 #endif
 }
 
@@ -44,6 +46,8 @@ void logger::w(const char *fmt, ...) {
 
 #ifdef WIN32
 	OutputDebugStringA(output);
+#else
+    fprintf(stderr, "%s", output);
 #endif
 }
 
@@ -64,5 +68,7 @@ void logger::e(const char *fmt, ...) {
 
 #ifdef WIN32
 	OutputDebugStringA(output);
+#else
+    fprintf(stderr, "%s", output);
 #endif
 }
