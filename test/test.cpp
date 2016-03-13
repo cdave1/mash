@@ -283,7 +283,7 @@ void test::TestQuaternions() {
         Quaternion qqr = qq1 * qq2 * qq3;
         Matrix::FromQuaternion(rot_2, qqr);
 
-        assert(Matrix::Equals(rot_1, rot_2, 0.0005));
+        assert(Matrix::Equals(rot_1, rot_2, 0.005));
     }
 
     Matrix m1, m2, m3, mm;

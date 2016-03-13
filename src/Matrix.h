@@ -46,59 +46,38 @@ public:
     // (mOut = p1 * p2). A copy of the result matrix is done in
     // the function because mOut can be a parameter mA or mB.
     //
-    static Matrix& Multiply(Matrix *res,
-                         const Matrix &a,
-                         const Matrix &b);
-
+    static Matrix& Multiply(Matrix *res, const Matrix &a, const Matrix &b);
 
     static void Print(Matrix &m);
 
-
     static bool Equals(const Matrix &a, const Matrix &b, const float precision=0);
 
-
     static void Set(Matrix &m, float *f);
-
 
     //
     // Build a translation matrix mOut using fX, fY and fZ.
     //
-    static void Translation(Matrix &m,
-                            const float fX,
-                            const float fY,
-                            const float fZ);
-
+    static void Translation(Matrix &m, const float fX, const float fY, const float fZ);
 
     static void Translation(Matrix &m, const Vec3 &vec);
-
 
     //
     // Build a scale matrix mOut using fX, fY and fZ.
     //
-    static void Scale(Matrix &m,
-                      const float fX,
-                      const float fY,
-                      const float fZ);
-
+    static void Scale(Matrix &m, const float fX, const float fY, const float fZ);
 
     static void Scale(Matrix &m, const Vec3 &vec);
 
-
     static void Transpose(Matrix &m, const Matrix &matrix);
-
 
     static void FromQuaternion(Matrix &m, const Quaternion &q);
 
-
     static void ToQuaternion(Quaternion &q, const Matrix &matrix);
-
 
     //
     // Create an X rotation matrix mOut.
     //
-    static void RotationX(Matrix &m,
-                          const float fAngle);
-
+    static void RotationX(Matrix &m, const float fAngle);
 
     //
     // Create an Y rotation matrix mOut.
@@ -128,16 +107,9 @@ public:
 
     static void Ortho(Matrix &m, float l, float r, float b, float t, float n, float f);
 
-    static void LookAtRH(Matrix &m,
-                         const Vec3 &eye,
-                         const Vec3 &at,
-                         const Vec3 &up);
+    static void LookAtRH(Matrix &m, const Vec3 &eye, const Vec3 &at, const Vec3 &up);
 
-    static void PerspectiveFovRH(Matrix &m,
-                                 const float fFOVy,
-                                 const float fAspect,
-                                 const float fNear,
-                                 const float fFar);
+    static void PerspectiveFovRH(Matrix &m, const float fovy, const float aspect, const float _near, const float _far);
 
     static float Determinant(const Matrix &m);
 

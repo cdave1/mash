@@ -455,10 +455,7 @@ void Matrix::Ortho(Matrix &m,
 }
 
 
-void Matrix::LookAtRH(Matrix &m,
-                      const Vec3 &pos,
-                      const Vec3 &target,
-                      const Vec3 &up) {
+void Matrix::LookAtRH(Matrix &m, const Vec3 &pos, const Vec3 &target, const Vec3 &up) {
     Vec3 z_axis = scraps::normalize(pos - target);
     Vec3 x_axis = scraps::normalize(scraps::cross(up, z_axis));
     Vec3 y_axis = scraps::cross(z_axis, x_axis);
@@ -470,13 +467,9 @@ void Matrix::LookAtRH(Matrix &m,
 }
 
 
-void Matrix::PerspectiveFovRH(Matrix &m,
-                              const float fov_y,
-                              const float aspect,
-                              const float _near,
-                              const float _far) {
+void Matrix::PerspectiveFovRH(Matrix &m, const float fovy, const float aspect, const float _near, const float _far) {
 #if 1
-    float f = 1.0f / tanf(fov_y * 0.5f);
+    float f = 1.0f / tanf(fovy * 0.5f);
 
     m[ 0] = f / aspect;     m[ 4] = 0;          m[ 8] = 0;                   m[12] = 0;
     m[ 1] = 0;              m[ 5] = f;          m[ 9] = 0;                   m[13] = 0;
