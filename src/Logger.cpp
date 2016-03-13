@@ -24,7 +24,7 @@ void logger::i(const char *fmt, ...) {
     }
 
 #ifdef WIN32
-	OutputDebugStringA(output);
+    OutputDebugStringA(output);
 #else
     fprintf(stderr, "%s", output);
 #endif
@@ -45,7 +45,7 @@ void logger::w(const char *fmt, ...) {
     }
 
 #ifdef WIN32
-	OutputDebugStringA(output);
+    OutputDebugStringA(output);
 #else
     fprintf(stderr, "%s", output);
 #endif
@@ -67,7 +67,7 @@ void logger::e(const char *fmt, ...) {
     }
 
 #ifdef WIN32
-	OutputDebugStringA(output);
+    OutputDebugStringA(output);
 #else
     fprintf(stderr, "%s", output);
 #endif

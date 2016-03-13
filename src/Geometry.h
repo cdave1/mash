@@ -298,8 +298,6 @@ namespace scraps {
 
     // Assuming the vertices define the hull of a solid shape, this function
     // returns true as soon as a triangle can be found that contains the given point.
-    //
-    // Use sparingly.
     inline bool ConcavePolygonContainsPoint(const Vec3* vertices, const int vertexCount, const Vec3& center, const Vec3& point) {
         if (vertexCount == 1) return point == vertices[0];
         if (vertexCount == 2) return false; // lazy
@@ -342,19 +340,12 @@ namespace scraps {
 
         float angle = atan2f(_v2[1], _v2[0]) - atan2f(_v1[1], _v1[0]);
 
-
-
-        //	Vec2 c = hdCross(v1, v2);
-        //	float angle = atan2(c.Length(), hdDot(v1, v2));
-        //return (angle < 0.0f) ? angle + (2.0f * _VAST_pi) : angle;
         return angle;
     }
 
 
     inline float GetAngle(const Vec3& v1, const Vec3& v2, const Vec3& ref) {
-        return scraps::GetAngle(Vec2(v1[0], v1[1]),
-                            Vec2(v2[0], v2[1]),
-                            Vec2(ref[0], ref[1]));
+        return scraps::GetAngle(Vec2(v1[0], v1[1]), Vec2(v2[0], v2[1]), Vec2(ref[0], ref[1]));
     }
 
 
