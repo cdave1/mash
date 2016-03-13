@@ -51,3 +51,4 @@ stamp-h1
 /src/Matrix.ios.*
 
 .libs/
+/test/test
