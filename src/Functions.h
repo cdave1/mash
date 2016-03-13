@@ -14,10 +14,6 @@
 #include <AABB.h>
 
 namespace scraps {
-    inline void PrintMe() {
-        fprintf(stderr, "hello world");
-    }
-
     inline Vec3 unproject(const Vec3 &window_pos, const Matrix &modelView, const Matrix &projection,
                           const AABB &viewport) {
         Matrix inverse, view;
