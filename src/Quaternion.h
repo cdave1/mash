@@ -73,7 +73,7 @@ typedef struct Quaternion {
         float dot = forward * direction;
 
         if (fabs(dot - (-1.0f)) < 0.000001f) {
-            return Quaternion(up, hd_pi);
+            return Quaternion(up, math_pi);
         }
         if (fabs(dot - (1.0f)) < 0.000001f) {
             return Quaternion();

@@ -10,6 +10,8 @@ void test::TestEquality() {
     Matrix::Identity(i1);
     Matrix::Identity(i2);
     assert(Matrix::Equals(i1, i2));
+
+    logger::i("%s Passed ✓\n", __FUNCTION__);
 }
 
 
@@ -68,6 +70,8 @@ void test::TestMatrixDeterminant() {
     d1 = test::GetTestDeterminant(d);
     d2 = Matrix::Determinant(d);
     assert(d1 == d2);
+
+    logger::i("%s Passed ✓\n", __FUNCTION__);
 }
 
 
@@ -92,6 +96,8 @@ void test::TestInverse() {
     e[ 2] = -0.001;      e[ 6] = -0.175;     e[10] = -200.069;  e[14] = 199.084;
     e[ 3] = -0.000;      e[ 7] = -0.000;     e[11] = -0.500;    e[15] = 0.500;
     assert(Matrix::Equals(result, e, 0.001f));
+
+    logger::i("%s Passed ✓\n", __FUNCTION__);
 }
 
 
@@ -107,7 +113,7 @@ void test::TestViewProjectionInverse() {
     Vec3 up(0, 1, 0);
 
     Matrix::LookAtRH(view, eye, at, up);
-    Matrix::PerspectiveFovRH(projection, hd_half_pi, 1.0f, 1.0f, 100000.0f);
+    Matrix::PerspectiveFovRH(projection, math_half_pi, 1.0f, 1.0f, 100000.0f);
 
     viewProjectionMatrix = projection * view;
 
@@ -136,10 +142,7 @@ void test::TestViewProjectionInverse() {
 
     Vec3 rebuiltPositionWS = eye + (viewDistance * viewRay);
 
-
-    //logger::i("The length is: %3.3f, %3.3f, %3.3f\n", rebuiltPositionWS[0], rebuiltPositionWS[1], rebuiltPositionWS[2]);
-
-
+    logger::i("%s Passed ✓\n", __FUNCTION__);
 }
 
 
@@ -182,6 +185,8 @@ void test::TestMatrixMultiplication1() {
     assert(r[13] == 0);
     assert(r[14] == 0);
     assert(r[15] == 1);
+
+    logger::i("%s Passed ✓\n", __FUNCTION__);
 }
 
 
@@ -224,22 +229,23 @@ void test::TestMatrixMultiplication2() {
     assert(r[13] == (aa[ 1] * bb[12]) + (aa[ 5] * bb[13]) + (aa[ 9] * bb[14]) + (aa[13] * bb[15]));
     assert(r[14] == (aa[ 2] * bb[12]) + (aa[ 6] * bb[13]) + (aa[10] * bb[14]) + (aa[14] * bb[15]));
     assert(r[15] == (aa[ 3] * bb[12]) + (aa[ 7] * bb[13]) + (aa[11] * bb[14]) + (aa[15] * bb[15]));
+
+    logger::i("%s Passed ✓\n", __FUNCTION__);
 }
 
 
 void test::TestQuaternions() {
-    Quaternion q1(Vec3(0, 1, 0), hd_half_pi);
-    Quaternion q2(Vec3(0, 1, 0), hd_half_pi);
+    Quaternion q1(Vec3(0, 1, 0), math_half_pi);
+    Quaternion q2(Vec3(0, 1, 0), 0);
 
-    logger::i("q1: %3.3f %3.3f %3.3f %3.3f\n", q1[0], q1[1], q1[2], q1[3]);
-    logger::i("q2: %3.3f %3.3f %3.3f %3.3f\n", q2[0], q2[1], q2[2], q2[3]);
+    q2 = q1 * q2;
 
     assert(q1[0] == q2[0]);
     assert(q1[1] == q2[1]);
     assert(q1[2] == q2[2]);
     assert(q1[3] == q2[3]);
     Matrix m;
-    Matrix::RotationY(m, -hd_half_pi);
+    Matrix::RotationY(m, -math_half_pi);
     Matrix qm;
     Matrix::FromQuaternion(qm, q1);
     assert(Matrix::Equals(m, qm, 0.0005));
@@ -264,21 +270,21 @@ void test::TestQuaternions() {
     Matrix::LookAtRH(lookAtMatrix, location + eye, location + target, upAxis);
 
     Matrix rotm;
-    Matrix::RotationXYZOrigin(rotm, Vec3(hd_half_pi, hd_half_pi, hd_half_pi));
+    Matrix::RotationXYZOrigin(rotm, Vec3(math_half_pi, math_half_pi, math_half_pi));
 
     {
         Matrix rot_1, rot_2;
 
-        Quaternion qx(Vec3(1, 0, 0), hd_half_pi);
-        Quaternion qy(Vec3(0, 1, 0), hd_half_pi);
-        Quaternion qz(Vec3(0, 0, 1), hd_half_pi);
+        Quaternion qx(Vec3(1, 0, 0), math_half_pi);
+        Quaternion qy(Vec3(0, 1, 0), math_half_pi);
+        Quaternion qz(Vec3(0, 0, 1), math_half_pi);
 
         Quaternion qw = qx * qy * qz;
         Matrix::FromQuaternion(rot_1, qw);
 
-        Quaternion qq1(Vec3(1, 0, 0), -hd_half_pi);
-        Quaternion qq2(Vec3(0, 1, 0), -hd_half_pi);
-        Quaternion qq3(Vec3(0, 0, 1), -hd_half_pi);
+        Quaternion qq1(Vec3(-1, 0, 0), math_2_pi - math_half_pi);
+        Quaternion qq2(Vec3(0, -1, 0), math_2_pi - math_half_pi);
+        Quaternion qq3(Vec3(0, 0, -1), math_2_pi - math_half_pi);
 
         Quaternion qqr = qq1 * qq2 * qq3;
         Matrix::FromQuaternion(rot_2, qqr);
@@ -287,18 +293,18 @@ void test::TestQuaternions() {
     }
 
     Matrix m1, m2, m3, mm;
-    Matrix::RotationY(m1, 0.2 * hd_half_pi);
-    Matrix::RotationY(m2, 0.2 * hd_half_pi);
-    Matrix::RotationY(m3, 0.4 * hd_half_pi);
+    Matrix::RotationY(m1, 0.2 * math_half_pi);
+    Matrix::RotationY(m2, 0.2 * math_half_pi);
+    Matrix::RotationY(m3, 0.4 * math_half_pi);
 
     mm = m1 * m2;
 
     assert(Matrix::Equals(mm, m3, 0.0005));
 
     // Test quaternion rotation operator
-    Quaternion qrot(Vec3(1, 0, 0), 0.5 * hd_half_pi);
+    Quaternion qrot(Vec3(1, 0, 0), 0.5 * math_half_pi);
     Matrix mrot, mqrot;
-    Matrix::RotationX(mrot, 0.5 * hd_half_pi);
+    Matrix::RotationX(mrot, 0.5 * math_half_pi);
     Matrix::FromQuaternion(mqrot, qrot);
 
     Vec3 victim(0, 1, 1);
@@ -308,7 +314,7 @@ void test::TestQuaternions() {
     Matrix::Vec3Multiply(r2, victim, mqrot);
     r3 = qrot * victim;
 
-    float theta = hd_2_pi / 64.0f;
+    float theta = math_2_pi / 64.0f;
     Quaternion qtheta(Vec3(0, 1, 0), theta);
     Quaternion curr(0, 0, 0, 1);
     Vec3 start(2, 0, 2);
@@ -323,7 +329,7 @@ void test::TestQuaternions() {
         assert(value[2] - next[2] < EPSILON);
     }
 
-    logger::i("Done\n");
+    logger::i("%s Passed ✓\n", __FUNCTION__);
 }
 
 
@@ -333,11 +339,11 @@ void test::TestQuaternions2() {
 
     const float ROTATION_START = 0.2f;
 
-    Quaternion rotationAdjustment(Vec3(0, 1, 0), - (hd_half_pi / 2));
+    Quaternion rotationAdjustment(Vec3(0, 1, 0), - (math_half_pi / 2));
     Quaternion rotationQuat(Vec3(0, 1, 0), ROTATION_START);
     rotationQuat = rotationQuat * rotationAdjustment;
 
-    Quaternion stepQuat(Vec3(0, 1, 0), (hd_half_pi / 4));
+    Quaternion stepQuat(Vec3(0, 1, 0), (math_half_pi / 4));
 
     locationQuat = rotationQuat * locationQuat;
 
@@ -346,12 +352,12 @@ void test::TestQuaternions2() {
     const float EPSILON = 0.001f;
 
     Matrix stepMatrix;
-    Matrix::RotationY(stepMatrix, (hd_half_pi / 4));
+    Matrix::RotationY(stepMatrix, (math_half_pi / 4));
 
     Matrix rot;
-    float rotationAngle = ROTATION_START - (hd_half_pi / 2);
+    float rotationAngle = ROTATION_START - (math_half_pi / 2);
 
-    Matrix::RotationY(rot, ROTATION_START - (hd_half_pi / 2));
+    Matrix::RotationY(rot, ROTATION_START - (math_half_pi / 2));
     Matrix::Vec3Multiply(locationMatrix, locationMatrix, rot);
 
     assert(fabs(locationMatrix[0] - locationQuat[0]) < EPSILON);
@@ -373,7 +379,7 @@ void test::TestQuaternions2() {
         rotationQuat = rotationQuat * stepQuat;
 
         Matrix::Vec3Multiply(locationMatrix, locationMatrix, stepMatrix);
-        rotationAngle += (hd_half_pi / 4);
+        rotationAngle += (math_half_pi / 4);
         Quaternion rotQuat(Vec3(0, 1, 0), rotationAngle);
 
         Matrix rq1, rq2;
@@ -381,11 +387,12 @@ void test::TestQuaternions2() {
         Matrix::FromQuaternion(rq2, rotationQuat);
         assert(Matrix::Equals(rq1, rq2, 0.001f));
     }
+
+    logger::i("%s Passed ✓\n", __FUNCTION__);
 }
 
 
 void test::TestQuaternions3() {
-    logger::i("Testing quaternion length and normalization functions\n");
     Quaternion q1(0.0f, 0.0f, 0.0f, 0.0f);
     assert(q1.Length() == 0.0f);
 
@@ -409,7 +416,7 @@ void test::TestQuaternions3() {
     q4.Normalize();
     assert(q4 == Quaternion(0.5f, 0.5f, 0.5f, 0.5f));
 */
-    logger::i("Done %s\n", __FUNCTION__);
+    logger::i("%s Passed ✓\n", __FUNCTION__);
 }
 
 
@@ -425,14 +432,14 @@ void test::TestClipping() {
     Matrix perspective;
     Matrix projection;
     Matrix::LookAtRH(lookat, eye, at, up);
-    Matrix::PerspectiveFovRH(perspective, 90.0f*(hd_pi/180.0f), 1.0f, 1.0f, 1000.0f);
+    Matrix::PerspectiveFovRH(perspective, 90.0f*(math_pi/180.0f), 1.0f, 1.0f, 1000.0f);
     projection = perspective * lookat;
 
     Vec3 insideResult, outsideResult;
     Matrix::Vec3Multiply(insideResult, inside, projection);
     Matrix::Vec3Multiply(outsideResult, outside, projection);
 
-    logger::i("Finished\n");
+    logger::i("%s Passed ✓\n", __FUNCTION__);
 }
 
 
@@ -453,7 +460,7 @@ void test::TestFrustum() {
     Matrix perspective;
     Matrix projection;
     Matrix::LookAtRH(lookat, eye, at, up);
-    Matrix::PerspectiveFovRH(perspective, 90.0f*(hd_pi/180.0f), 1.0f, 1.0f, 1000.0f);
+    Matrix::PerspectiveFovRH(perspective, 90.0f*(math_pi/180.0f), 1.0f, 1.0f, 1000.0f);
     projection = perspective * lookat;
 
     Frustum frustum(projection);
@@ -465,5 +472,5 @@ void test::TestFrustum() {
     assert(!frustum.Contains(b, 0.0f));
     assert(!frustum.Contains(outside, 0.0f));
 
-    logger::i("TestFrustum\n");
+    logger::i("%s Passed ✓\n", __FUNCTION__);
 }
