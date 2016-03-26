@@ -8,7 +8,7 @@
 #include <assert.h>
 
 typedef struct Quaternion {
-	Quaternion () {
+    Quaternion () {
         v[0] = 0.0f;
         v[1] = 0.0f;
         v[2] = 0.0f;
@@ -26,21 +26,6 @@ typedef struct Quaternion {
         v[2] = unitAxis[2] * sinHalfAngle;
         v[3] = cosf(halfAngle);
     }
-
-    /*
-    Quaternion(Axis A, float angle, RotateDirection d) {
-        const float RHS = 1.0f;
-
-        float sinHalfAngle = RHS * d * sin(angle * 0.5f);
-        Vec3 vec;
-        vec[0] = vec[1] = vec[2] = 0.0f;
-        vec[A] = sinHalfAngle;
-
-        v[0] = vec[0];
-        v[1] = vec[1];
-        v[2] = vec[2];
-        v[3] = cosf(angle * 0.5f);
-    }*/
 
 
     Quaternion (float x, float y, float z, float w) {
@@ -134,7 +119,7 @@ http://lolengine.net/blog/2014/02/24/quaternion-from-two-vectors-final
     }
 
 
-	void Set(float x, float y, float z, float w) {
+    void Set(float x, float y, float z, float w) {
         v[0] = x;
         v[1] = y;
         v[2] = z;
@@ -205,7 +190,7 @@ http://lolengine.net/blog/2014/02/24/quaternion-from-two-vectors-final
         return v[index];
     }
 
-	float v[4];
+    float v[4];
 } Quaternion;
 
 
