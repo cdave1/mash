@@ -5,7 +5,7 @@
 #include <Size2.h>
 
 typedef struct AABB {
-	AABB() : lower(), upper() {}
+    AABB() : lower(), upper() {}
 
 
     AABB(float width, float height) {
@@ -41,19 +41,19 @@ typedef struct AABB {
     }
 
 
-	float Width() const {
-		return upper[0] - lower[0];
-	}
+    float Width() const {
+        return upper[0] - lower[0];
+    }
 
 
-	float Height() const {
-		return upper[1] - lower[1];
-	}
+    float Height() const {
+        return upper[1] - lower[1];
+    }
 
 
     float Depth() const {
-		return upper[2] - lower[2];
-	}
+        return upper[2] - lower[2];
+    }
 
 
     Vec3 Half() const {
@@ -78,8 +78,8 @@ typedef struct AABB {
     }
 
 
-	Vec3 lower;
-	Vec3 upper;
+    Vec3 lower;
+    Vec3 upper;
 } AABB;
 
 inline bool operator == (const AABB &a, const AABB &b) {

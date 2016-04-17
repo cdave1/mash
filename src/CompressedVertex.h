@@ -11,7 +11,7 @@
 // TODO: MOAR COMPRESHUN.
 //
 struct CompressedVertex {
-	CompressedVertex () {
+    CompressedVertex () {
         origin.Set(0, 0, 0);
         color.Setf(1.0f, 1.0f, 1.0f, 1.0f);
         normal.Set(0, 0, 0);

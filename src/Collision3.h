@@ -14,7 +14,7 @@
 /// reflectedRay will have the range: 0 <= reflectedRay <= incidentRay
 ///
 struct Collision3 {
-	Collision3 () {
+    Collision3 () {
         origin.Set(0, 0, 0);
         normal.Set(0, 0, 0);
         incidentRay.Set(0, 0, 0);

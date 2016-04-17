@@ -8,7 +8,7 @@
 
 
 struct Frustum {
-	Frustum (Matrix &mvp) {
+    Frustum (Matrix &mvp) {
         planes[0] = Plane(mvp[3] - mvp[0], mvp[7] - mvp[4], mvp[11] - mvp[8], mvp[15] - mvp[12]);
         planes[1] = Plane(mvp[3] + mvp[0], mvp[7] + mvp[4], mvp[11] + mvp[8], mvp[15] + mvp[12]);
 

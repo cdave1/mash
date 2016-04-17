@@ -4,7 +4,7 @@
 #include <Vertex.h>
 
 struct Triangle {
-	Triangle () {
+    Triangle () {
         vertices[0].Reset();
         vertices[1].Reset();
         vertices[2].Reset();

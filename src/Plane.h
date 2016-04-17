@@ -5,7 +5,7 @@
 #include <Vec4.h>
 
 typedef struct Plane {
-	Plane () {
+    Plane () {
         normal = Vec3();
         d = 0.0f;
     }

@@ -2,7 +2,7 @@
 #define _MATH_SCRAPS_SIZE3_H_
 
 typedef struct Size3 {
-	Size3 () {
+    Size3 () {
         _v[0] = 0;
         _v[1] = 0;
         _v[2] = 0;
@@ -23,7 +23,7 @@ typedef struct Size3 {
     }
 
 
-	void Set(uint32_t x, uint32_t y, uint32_t z) {
+    void Set(uint32_t x, uint32_t y, uint32_t z) {
         _v[0] = x;
         _v[1] = y;
         _v[2] = z;
@@ -45,38 +45,38 @@ typedef struct Size3 {
     }
 
 
-	void operator += (const Size3& a) {
+    void operator += (const Size3& a) {
         _v[0] += a[0];
         _v[1] += a[1];
         _v[2] += a[2];
     }
 
 
-	void operator -= (const Size3& a) {
+    void operator -= (const Size3& a) {
         _v[0] -= a[0];
         _v[1] -= a[1];
         _v[2] -= a[2];
-	}
+    }
 
 
-	void operator *= (uint32_t s) {
+    void operator *= (uint32_t s) {
         _v[0] *= s;
         _v[1] *= s;
         _v[2] *= s;
-	}
+    }
 
 
     // Dot product
-	uint32_t operator * (const Size3& a) const {
+    uint32_t operator * (const Size3& a) const {
         return _v[0] * a[0] + _v[1] * a[1] + _v[2] * a[2];
-	}
+    }
 
-	uint32_t _v[3];
+    uint32_t _v[3];
 } Size3;
 
 
 inline Size3 operator + (const Size3& a, const Size3& b) {
-	return Size3(a[0] + b[0], a[1] + b[1], a[2] + b[2]);
+    return Size3(a[0] + b[0], a[1] + b[1], a[2] + b[2]);
 }
 
 
@@ -86,12 +86,12 @@ inline Size3 operator - (const Size3& a, const Size3& b) {
 
 
 inline Size3 operator * (uint32_t s, const Size3& a) {
-	return Size3(s * a[0], s * a[1], s * a[2]);
+    return Size3(s * a[0], s * a[1], s * a[2]);
 }
 
 
 inline bool operator == (const Size3& a, const Size3& b) {
-	return a[0] == b[0] && a[1] == b[1] && a[2] == b[2];
+    return a[0] == b[0] && a[1] == b[1] && a[2] == b[2];
 }
 
 #endif
