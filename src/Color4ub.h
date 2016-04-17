@@ -3,28 +3,23 @@
 
 #include <Color4f.h>
 
-struct Color4ub
-{
-	Color4ub()
-    {
+struct Color4ub {
+	Color4ub() {
         SetZero();
     }
 
 
-	Color4ub (float rf, float gf, float bf, float af)
-    {
+	Color4ub (float rf, float gf, float bf, float af) {
         Setf(rf, gf, bf, af);
     }
 
 
-	Color4ub (uint8_t rb, uint8_t gb, uint8_t bb, uint8_t ab)
-    {
+	Color4ub (uint8_t rb, uint8_t gb, uint8_t bb, uint8_t ab) {
         Set(rb, gb, bb, ab);
     }
 
 
-	Color4ub (int ri, int gi, int bi, int ai)
-    {
+	Color4ub (int ri, int gi, int bi, int ai) {
         r = (uint8_t)ri;
         g = (uint8_t)gi;
         b = (uint8_t)bi;
@@ -32,8 +27,7 @@ struct Color4ub
     }
 
 
-    void SetZero()
-    {
+    void SetZero() {
         r = 0;
         g = 0;
         b = 0;
@@ -46,8 +40,7 @@ struct Color4ub
     }
 
 
-	void Setf(float rf, float gf, float bf, float af)
-	{
+	void Setf(float rf, float gf, float bf, float af) {
 		r = (uint8_t)(rf * 255);
 		g = (uint8_t)(gf * 255);
 		b = (uint8_t)(bf * 255);
@@ -55,8 +48,7 @@ struct Color4ub
 	}
 
 
-	void Set(uint8_t r_, uint8_t g_, uint8_t b_, uint8_t a_)
-	{
+	void Set(uint8_t r_, uint8_t g_, uint8_t b_, uint8_t a_) {
 		r = r_;
 		g = g_;
 		b = b_;

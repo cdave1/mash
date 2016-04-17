@@ -165,6 +165,18 @@ namespace scraps {
 
 
     template <typename T>
+    inline T min3(T a, T b, T c) {
+        return (a <= c) ? min(a, b) : min(a, c);
+    }
+
+
+    template <typename T>
+    inline T max3(T a, T b, T c) {
+        return (a >= c) ? max(a, b) : max(a, c);
+    }
+
+
+    template <typename T>
     inline T clamp(T a, T floor, T ceiling) {
         return scraps::min(ceiling, scraps::max(floor, a));
     }

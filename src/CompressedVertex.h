@@ -18,6 +18,7 @@ struct CompressedVertex {
         texCoord.Set(0, 0);
     }
 
+
     CompressedVertex(const Vertex &vertex) {
         origin.Set(vertex.origin);
         color.Setf(vertex.color[0], vertex.color[1], vertex.color[2], vertex.color[3]);
@@ -25,12 +26,14 @@ struct CompressedVertex {
         texCoord.Set(vertex.texCoord);
     }
 
+
     void Reset() {
         origin.Set(0, 0, 0);
         color.Setf(1.0f, 1.0f, 1.0f, 1.0f);
         normal.Set(0, 0, 0);
         texCoord.Set(0, 0);
     }
+
 
     Vec3 origin;
     Color4ub color;

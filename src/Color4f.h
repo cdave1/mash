@@ -22,6 +22,14 @@ typedef struct Color4f {
     }
 
 
+	Color4f (uint32_t hexRGB) {
+		Set(((hexRGB >> 16) & 0xff) / 255.0f,
+			((hexRGB >> 8) & 0xff) / 255.0f,
+			(hexRGB & 0xff) / 255.0f,
+			1.0f);
+	}
+
+
     inline float& operator[](unsigned int index) {
         return f[index];
     }
