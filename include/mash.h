@@ -1,5 +1,5 @@
-#ifndef _MATH_SCRAPS_H_
-#define _MATH_SCRAPS_H_
+#ifndef _MASH_H_
+#define _MASH_H_
 
 #include <common.h>
 

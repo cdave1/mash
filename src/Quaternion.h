@@ -18,7 +18,7 @@ typedef struct Quaternion {
 
     Quaternion(const Vec3& axis, float theta) {
         float halfAngle = theta * 0.5f;
-        Vec3 unitAxis = scraps::normalize(axis);
+        Vec3 unitAxis = mash::normalize(axis);
         float sinHalfAngle = sinf(halfAngle);
 
         v[0] = unitAxis[0] * sinHalfAngle;
@@ -37,7 +37,7 @@ typedef struct Quaternion {
 
 /*
     static Quaternion LookRotation(const Vec3& at, const Vec3& up) {
-        Vector forward = scraps::normalize(at);
+        Vector forward = mash::normalize(at);
         Vector::OrthoNormalize(&up, &forward); // Keeps up the same, make forward orthogonal to up
         Vector right = Vector::Cross(up, forward);
 
@@ -53,7 +53,7 @@ typedef struct Quaternion {
 
 
     static Quaternion LookAt(const Vec3 &eye, const Vec3 &at, const Vec3 &up) {
-        Vec3 direction = scraps::normalize(at - eye);
+        Vec3 direction = mash::normalize(at - eye);
         Vec3 forward(0, 0, 1);
         float dot = forward * direction;
 
@@ -65,8 +65,8 @@ typedef struct Quaternion {
         }
 
         float rotationAngle = acosf(dot);
-        Vec3 rotationAxis = scraps::cross(forward, direction);
-        rotationAxis = scraps::normalize(rotationAxis);
+        Vec3 rotationAxis = mash::cross(forward, direction);
+        rotationAxis = mash::normalize(rotationAxis);
         return Quaternion(rotationAxis, rotationAngle);
     }
 
@@ -105,7 +105,7 @@ http://lolengine.net/blog/2014/02/24/quaternion-from-two-vectors-final
             real_part = 0.0f;
             w = fabs(u[0]) > fabs(u[3]) ? Vec3(-u[1], u[0], 0.0f) : Vec3(0.0f, -u[2], u[1]);
         } else {
-            w = scraps::cross(u, v);
+            w = mash::cross(u, v);
         }
         return Quaternion(w[0], w[1], w[2], real_part);
     }
@@ -167,8 +167,8 @@ http://lolengine.net/blog/2014/02/24/quaternion-from-two-vectors-final
     ///
     Vec3 operator *(const Vec3 &vec) const {
         Vec3 q(v[0], v[1], v[2]);
-        Vec3 t = 2 * scraps::cross(q, vec);
-        Vec3 ret = vec + v[3] * t + scraps::cross(q, t);
+        Vec3 t = 2 * mash::cross(q, vec);
+        Vec3 ret = vec + v[3] * t + mash::cross(q, t);
         return ret;
     }
 

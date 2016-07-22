@@ -267,8 +267,8 @@ void Matrix::ToQuaternion(Quaternion &q, const Matrix &matrix) {
 
 
 void Matrix::RotationX(Matrix &m, const float fAngle) {
-    float fsin = scraps::sin(fAngle);
-    float fcos = scraps::cos(fAngle);
+    float fsin = mash::sin(fAngle);
+    float fcos = mash::cos(fAngle);
 
     m[ 0] = 1;    m[ 4] = 0;      m[ 8] = 0;      m[12] = 0;
     m[ 1] = 0;    m[ 5] = fcos;   m[ 9] = -fsin;  m[13] = 0;
@@ -278,8 +278,8 @@ void Matrix::RotationX(Matrix &m, const float fAngle) {
 
 
 void Matrix::RotationY(Matrix &m, const float fAngle) {
-    float fsin = scraps::sin(fAngle);
-    float fcos = scraps::cos(fAngle);
+    float fsin = mash::sin(fAngle);
+    float fcos = mash::cos(fAngle);
 
     m[ 0] = fcos;   m[ 4] = 0;      m[ 8] = fsin;   m[12] = 0;
     m[ 1] = 0;      m[ 5] = 1;      m[ 9] = 0;      m[13] = 0;
@@ -289,8 +289,8 @@ void Matrix::RotationY(Matrix &m, const float fAngle) {
 
 
 void Matrix::RotationZ(Matrix &m, const float fAngle) {
-    float fsin = scraps::sin(fAngle);
-    float fcos = scraps::cos(fAngle);
+    float fsin = mash::sin(fAngle);
+    float fcos = mash::cos(fAngle);
 
     m[ 0] = fcos;   m[ 4] = -fsin;  m[ 8] = 0;      m[12] = 0;
     m[ 1] = fsin;   m[ 5] = fcos;   m[ 9] = 0;      m[13] = 0;
@@ -324,8 +324,8 @@ void Matrix::RotationXYZOrigin(Matrix &mOut, const Vec3 &rotation) {
 void Matrix::RotationXYZAxis(Matrix &m, const float angle, const Vec3& axis) {
     Matrix::Identity(m);
 
-    float fsin = scraps::sin(angle);
-    float fcos = scraps::cos(angle);
+    float fsin = mash::sin(angle);
+    float fcos = mash::cos(angle);
 
     m[0] = (axis[0] * axis[0]) * (1 - fcos) + fcos;
     m[1] = (axis[0] * axis[1]) * (1 - fcos) + (axis[2] * fsin);
@@ -349,8 +349,8 @@ void Matrix::RotationArbitraryLine(Matrix &m,
                                    const Vec3 &p) {
     Matrix::Identity(m);
 
-    float fsin = scraps::sin(delta);
-    float fcos = scraps::cos(delta);
+    float fsin = mash::sin(delta);
+    float fcos = mash::cos(delta);
 
     float u = p[0];
     float v = p[1];
@@ -456,9 +456,9 @@ void Matrix::Ortho(Matrix &m,
 
 
 void Matrix::LookAtRH(Matrix &m, const Vec3 &pos, const Vec3 &target, const Vec3 &up) {
-    Vec3 z_axis = scraps::normalize(pos - target);
-    Vec3 x_axis = scraps::normalize(scraps::cross(up, z_axis));
-    Vec3 y_axis = scraps::cross(z_axis, x_axis);
+    Vec3 z_axis = mash::normalize(pos - target);
+    Vec3 x_axis = mash::normalize(mash::cross(up, z_axis));
+    Vec3 y_axis = mash::cross(z_axis, x_axis);
 
     m[ 0] = x_axis[0];   m[ 4] = x_axis[1];   m[ 8] = x_axis[2];   m[12] = -(x_axis * pos);
     m[ 1] = y_axis[0];   m[ 5] = y_axis[1];   m[ 9] = y_axis[2];   m[13] = -(y_axis * pos);
@@ -589,7 +589,7 @@ void Matrix::Inverse(Matrix &mOut, const Matrix &mIn) {
     det_1 = pos + neg;
 
     /* Is the submatrix A singular? */
-    if ((det_1 == 0.0) || (scraps::abs(det_1 / (pos - neg)) < 1.0e-15)) {
+    if ((det_1 == 0.0) || (mash::abs(det_1 / (pos - neg)) < 1.0e-15)) {
         /* Matrix M has no inverse */
         logger::e("Matrix has no inverse : singular matrix\n");
         return;

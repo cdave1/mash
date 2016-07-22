@@ -1,6 +1,6 @@
 #include "test.h"
 
-#include <math_scraps.h>
+#include <mash.h>
 
 #include <assert.h>
 
@@ -136,7 +136,7 @@ void test::TestViewProjectionInverse() {
     Matrix::Vec3Multiply(_positionWS, Vec3(0, 0, 0), inverseViewProjectionMatrix);
 
     Vec3 iViewRay = _positionWS - eye;
-    Vec3 viewRay = scraps::normalize(iViewRay);
+    Vec3 viewRay = mash::normalize(iViewRay);
 
     float viewDistance = distance;
 

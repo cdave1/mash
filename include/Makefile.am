@@ -1,1 +1,1 @@
-nobase_include_HEADERS = math_scraps.h common.h
+nobase_include_HEADERS = mash.h common.h

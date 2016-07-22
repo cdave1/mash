@@ -14,22 +14,22 @@ public:
 
 
     void SetHue(float _hue) {
-        hue = scraps::clamp(_hue, 0.0f, 1.0f);
+        hue = mash::clamp(_hue, 0.0f, 1.0f);
     }
 
 
     void SetSaturation(float _saturation) {
-        saturation = scraps::clamp(_saturation, 0.0f, 1.0f);
+        saturation = mash::clamp(_saturation, 0.0f, 1.0f);
     }
 
 
     void SetValue(float _value) {
-        value = scraps::clamp(_value, 0.0f, 360.0f);
+        value = mash::clamp(_value, 0.0f, 360.0f);
     }
 
 
     void SetAlpha(float _alpha) {
-        alpha = scraps::clamp(_alpha, 0.0f, 1.0f);
+        alpha = mash::clamp(_alpha, 0.0f, 1.0f);
     }
 
 

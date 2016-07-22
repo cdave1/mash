@@ -1,6 +1,6 @@
-AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir) -I$(top_srcdir)/include/math_scraps.h
+AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir) -I$(top_srcdir)/include/mash.h
 
-AM_CFLAGS = $(GLOBAL_CFLAGS) -I$(top_srcdir)/include/math_scraps.h -I$(top_srcdir)/include/common.h
+AM_CFLAGS = $(GLOBAL_CFLAGS) -I$(top_srcdir)/include/mash.h -I$(top_srcdir)/include/common.h
 
 lib_LTLIBRARIES = libmathscraps.la
 libmathscraps_la_LDFLAGS = $(AM_LDFLAGS) -version-info $(LIBMATHSCRAPS_VERSION) -no-undefined

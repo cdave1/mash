@@ -5,7 +5,7 @@
 #include <Functions.h>
 #include <Matrix.h>
 
-namespace scraps {
+namespace mash {
     inline void ScaleVertices(Vertex *vertices, unsigned int vertexCount, const Vec3 &scale) {
         if (vertexCount == 0) return;
         for (unsigned i = 0; i < vertexCount; ++i) {
@@ -41,7 +41,7 @@ namespace scraps {
     inline float FastHypotenuse(const float x, const float y) {
         const float sqrt2 = 1.41421f;
 
-        return fabs(x) + fabs(y) - ((sqrt2 - 1) * scraps::min(fabs(x), fabs(y)));
+        return fabs(x) + fabs(y) - ((sqrt2 - 1) * mash::min(fabs(x), fabs(y)));
     }
 
 
@@ -84,7 +84,7 @@ namespace scraps {
         // a to b, b to c
         Vec3 ab = b - a;
         Vec3 bc = c - b;
-        Vec3 res = scraps::cross(ab, bc);
+        Vec3 res = mash::cross(ab, bc);
         return (res[2] > 0.0) ? 1 : (res[2] < 0.0f) ? -1 : 0;
     }
 
@@ -97,8 +97,8 @@ namespace scraps {
 
     inline float AABBArea(const Vec3& v1, const Vec3& v2) {
         AABB aabb;
-        aabb.lower = scraps::min(v1, v2);
-        aabb.upper = scraps::max(v1, v2);
+        aabb.lower = mash::min(v1, v2);
+        aabb.upper = mash::max(v1, v2);
         return AABBArea(aabb);
     }
 
@@ -110,8 +110,8 @@ namespace scraps {
             aabb.upper = vertices[0].origin;
 
             for (int i = 0; i < vertexCount; ++i) {
-                aabb.lower = scraps::min(aabb.lower, vertices[i].origin);
-                aabb.upper = scraps::max(aabb.upper, vertices[i].origin);
+                aabb.lower = mash::min(aabb.lower, vertices[i].origin);
+                aabb.upper = mash::max(aabb.upper, vertices[i].origin);
             }
         }
         return aabb;
@@ -144,7 +144,7 @@ namespace scraps {
                                     const float radius,
                                     Vec3 *location) {
 /*
-        scraps::log::i("Check RayIntersectsSphere: origin: (%.3f, %.3f, %.3f), direction: (%.3f, %.3f, %.3f) sphere: (%.3f, %.3f, %.3f) radius: %3.2f\n",
+        mash::log::i("Check RayIntersectsSphere: origin: (%.3f, %.3f, %.3f), direction: (%.3f, %.3f, %.3f) sphere: (%.3f, %.3f, %.3f) radius: %3.2f\n",
                    rayOrigin[0], rayOrigin[1], rayOrigin[2],
                    rayDirection[0], rayDirection[1], rayDirection[2],
                    sphereCenter[0], sphereCenter[1], sphereCenter[2],
@@ -255,16 +255,16 @@ namespace scraps {
         Matrix rot;
         Matrix::RotationXYZOrigin(rot, Vec3(0.0f, longitude, latitude));
         Matrix::Vec3Multiply(result, direction, rot);
-        result = scraps::normalize(result);
+        result = mash::normalize(result);
 /*
         Vec3 lat(cosf(latitude), sinf(latitude), sinf(longitude));
-        lat = scraps::normalize(lat);
+        lat = mash::normalize(lat);
 */
-        scraps::RayIntersectsSphere(Vec3(0.0f, 0.0f, 0.0f),
+        mash::RayIntersectsSphere(Vec3(0.0f, 0.0f, 0.0f),
                                 result,
                                 Vec3(0.0f, 0.0f, 0.0f),
                                 1.0f, &loc);
-        loc = scraps::normalize(loc);
+        loc = mash::normalize(loc);
         return loc;
     }
 
@@ -275,7 +275,7 @@ namespace scraps {
 
         signed int contains = 0;
         for (int i = 0; i < vertexCount; ++i) {
-            contains += scraps::CrossProductSign(vertices[i], vertices[(i+1)%vertexCount], point);
+            contains += mash::CrossProductSign(vertices[i], vertices[(i+1)%vertexCount], point);
         }
 
         return contains == vertexCount;
@@ -289,7 +289,7 @@ namespace scraps {
 
         signed int contains = 0x0001;
         for (int i = 0; i < polygonCount; ++i) {
-            contains |= scraps::VectorProductSign(polygon[i], polygon[(i+1)%polygonCount], point);
+            contains |= mash::VectorProductSign(polygon[i], polygon[(i+1)%polygonCount], point);
         }
 
         return contains == 0x0001;
@@ -307,7 +307,7 @@ namespace scraps {
             triangle[0] = center;
             triangle[1] = vertices[i];
             triangle[2] = vertices[(i+1) % vertexCount];
-            if (scraps::PolygonContainsPoint(triangle, 3, point)) return true;
+            if (mash::PolygonContainsPoint(triangle, 3, point)) return true;
         }
 
         return false;
@@ -323,7 +323,7 @@ namespace scraps {
             triangle[0].Set(center[0], center[1], 0.0f);
             triangle[1].Set(vertices[i][0], vertices[i][1], 0.0f);
             triangle[2].Set(vertices[(i+1) % vertexCount][0], vertices[(i+1) % vertexCount][1], 0.0f);
-            if (scraps::PolygonContainsPoint(triangle, 3, point2D)) return true;
+            if (mash::PolygonContainsPoint(triangle, 3, point2D)) return true;
         }
 
         return false;
@@ -335,8 +335,8 @@ namespace scraps {
         Vec2 _v1 = v1 - ref;
         Vec2 _v2 = v2 - ref;
 
-        _v1 = scraps::normalize(_v1);
-        _v2 = scraps::normalize(_v2);
+        _v1 = mash::normalize(_v1);
+        _v2 = mash::normalize(_v2);
 
         float angle = atan2f(_v2[1], _v2[0]) - atan2f(_v1[1], _v1[0]);
 
@@ -345,7 +345,7 @@ namespace scraps {
 
 
     inline float GetAngle(const Vec3& v1, const Vec3& v2, const Vec3& ref) {
-        return scraps::GetAngle(Vec2(v1[0], v1[1]), Vec2(v2[0], v2[1]), Vec2(ref[0], ref[1]));
+        return mash::GetAngle(Vec2(v1[0], v1[1]), Vec2(v2[0], v2[1]), Vec2(ref[0], ref[1]));
     }
 
 
@@ -357,7 +357,7 @@ namespace scraps {
 
         u = triangle[2] - triangle[0];
         v = triangle[1] - triangle[0];
-        n = scraps::cross(u, v);
+        n = mash::cross(u, v);
 
         dir = ray[1] - ray[0];
         w0 = ray[0] - triangle[0];
@@ -376,7 +376,7 @@ namespace scraps {
         dir *= r;
         vOut = ray[0] + dir;
 
-        //scraps::log::i("%f, %f, %f\n", vOut[0], vOut[1], vOut[2]);
+        //mash::log::i("%f, %f, %f\n", vOut[0], vOut[1], vOut[2]);
         //return hdPolygonContainsPoint(triangle, 3, vOut);
         float uu, uv, vv, wu, wv, D;
 
@@ -409,7 +409,7 @@ namespace scraps {
             triangle[0] = center;
             triangle[1] = vertices[i];
             triangle[2] = vertices[(i+1) % vertexCount];
-            if (scraps::RayIntersectsTriangle(triangle, ray, vOut)) return true;
+            if (mash::RayIntersectsTriangle(triangle, ray, vOut)) return true;
         }
 
         return false;
@@ -445,7 +445,7 @@ namespace scraps {
 
         signed int contains = 0;
         for (int i = 0; i < vertexCount; ++i) {
-            contains += scraps::CrossProductSign(vertices[i], vertices[(i+1)%vertexCount], vertices[(i+2)%vertexCount]);
+            contains += mash::CrossProductSign(vertices[i], vertices[(i+1)%vertexCount], vertices[(i+2)%vertexCount]);
         }
 
         return contains == vertexCount;
@@ -457,7 +457,7 @@ namespace scraps {
 
         signed int contains = 0;
         for (int i = 0; i < vertexCount; ++i) {
-            contains += scraps::CrossProductSign(vertices[i], vertices[(i+1)%vertexCount], vertices[(i+2)%vertexCount]);
+            contains += mash::CrossProductSign(vertices[i], vertices[(i+1)%vertexCount], vertices[(i+2)%vertexCount]);
         }
 
         return contains == -vertexCount;

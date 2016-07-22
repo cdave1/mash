@@ -13,7 +13,7 @@
 #include <Vec4.h>
 #include <AABB.h>
 
-namespace scraps {
+namespace mash {
     inline Vec3 unproject(const Vec3 &window_pos, const Matrix &modelView, const Matrix &projection,
                           const AABB &viewport) {
         Matrix inverse, view;
@@ -92,34 +92,34 @@ namespace scraps {
 
     inline Size2 min(const Size2 &a, const Size2 &b) {
         Size2 c;
-        c[0] = scraps::min(a[0], b[0]);
-        c[1] = scraps::min(a[1], b[1]);
+        c[0] = mash::min(a[0], b[0]);
+        c[1] = mash::min(a[1], b[1]);
         return c;
     }
 
 
     inline Size3 min(const Size3 &a, const Size3 &b) {
         Size3 c;
-        c[0] = scraps::min(a[0], b[0]);
-        c[1] = scraps::min(a[1], b[1]);
-        c[2] = scraps::min(a[2], b[2]);
+        c[0] = mash::min(a[0], b[0]);
+        c[1] = mash::min(a[1], b[1]);
+        c[2] = mash::min(a[2], b[2]);
         return c;
     }
 
 
     inline Vec2 min(const Vec2& a, const Vec2& b) {
         Vec2 c;
-        c[0] = scraps::min(a[0], b[0]);
-        c[1] = scraps::min(a[1], b[1]);
+        c[0] = mash::min(a[0], b[0]);
+        c[1] = mash::min(a[1], b[1]);
         return c;
     }
 
 
     inline Vec3 min(const Vec3& a, const Vec3& b) {
         Vec3 c;
-        c[0] = scraps::min(a[0], b[0]);
-        c[1] = scraps::min(a[1], b[1]);
-        c[2] = scraps::min(a[2], b[2]);
+        c[0] = mash::min(a[0], b[0]);
+        c[1] = mash::min(a[1], b[1]);
+        c[2] = mash::min(a[2], b[2]);
         return c;
     }
 
@@ -132,34 +132,34 @@ namespace scraps {
 
     inline Size2 max(const Size2 &a, const Size2 &b) {
         Size2 c;
-        c[0] = scraps::max(a[0], b[0]);
-        c[1] = scraps::max(a[1], b[1]);
+        c[0] = mash::max(a[0], b[0]);
+        c[1] = mash::max(a[1], b[1]);
         return c;
     }
 
 
     inline Size3 max(const Size3 &a, const Size3 &b) {
         Size3 c;
-        c[0] = scraps::max(a[0], b[0]);
-        c[1] = scraps::max(a[1], b[1]);
-        c[2] = scraps::max(a[2], b[2]);
+        c[0] = mash::max(a[0], b[0]);
+        c[1] = mash::max(a[1], b[1]);
+        c[2] = mash::max(a[2], b[2]);
         return c;
     }
 
 
     inline Vec2 max(const Vec2& a, const Vec2& b) {
         Vec2 c;
-        c[0] = scraps::max(a[0], b[0]);
-        c[1] = scraps::max(a[1], b[1]);
+        c[0] = mash::max(a[0], b[0]);
+        c[1] = mash::max(a[1], b[1]);
         return c;
     }
 
 
     inline Vec3 max(const Vec3& a, const Vec3& b) {
         Vec3 c;
-        c[0] = scraps::max(a[0], b[0]);
-        c[1] = scraps::max(a[1], b[1]);
-        c[2] = scraps::max(a[2], b[2]);
+        c[0] = mash::max(a[0], b[0]);
+        c[1] = mash::max(a[1], b[1]);
+        c[2] = mash::max(a[2], b[2]);
         return c;
     }
 
@@ -178,7 +178,7 @@ namespace scraps {
 
     template <typename T>
     inline T clamp(T a, T floor, T ceiling) {
-        return scraps::min(ceiling, scraps::max(floor, a));
+        return mash::min(ceiling, mash::max(floor, a));
     }
 
 
@@ -192,7 +192,7 @@ namespace scraps {
     ///
     template <typename T>
     inline T smoothstep(T edge0, T edge1, T a) {
-        T x = scraps::clamp((a - edge0)/(edge1 - edge0), T(0), T(1));
+        T x = mash::clamp((a - edge0)/(edge1 - edge0), T(0), T(1));
         return x*x*(3 - 2 * x);
     }
 
